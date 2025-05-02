@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    {% if user %}
+    <p>👤 Welcome, {{ user }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+{% else %}
+{% endif %}
+
+<p>📍 Location: {{ CITY }}, {{ COUNTRY }}</p>
+
+<head>
+    <title>Salat Compass</title>
+    <!-- BOOTSTRAP CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <body class="bg-light text-center py-5">
+        <div class="container">
+            <h1 class="display-5 mb-4 text-primary">Salat Compass</h1>
+            <blockquote class="blockquote text-center mt-3">
+                <p class="mb-0">
+                  <em>"Indeed, prayer has been decreed upon the believers a decree of specified times." – Surah An-Nisa (4:103)</em>
+                </p>
+              </blockquote>
+              
+            
+    
+            {% if user %}
+                <p>👤 <strong>Welcome, {{ user }}</strong> |
+                <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm">Logout</a></p>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-outline-primary me-2">Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-outline-success">Register</a>
+            {% endif %}
+    
+            <hr class="my-4">
+    
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title">🕌 Prayer Times</h4>
+                            <ul class="list-group">
+                                {% for prayer, time in timings.items() %}
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <strong>{{ prayer }}</strong>
+                                        <span>{{ time }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-5">
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title">🌤 Weather Info</h4>
+                            <p><strong>Description:</strong> {{ weather.description }}</p>
+                            <p><strong>Temperature:</strong> {{ weather.temp }}°C</p>
+                            <p><strong>Feels Like:</strong> {{ weather.feels_like }}°C</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">📝 Daily Reminder</h4>
+        
+                {% if session.get('reminder') %}
+                    <p><strong>Today's Reminder:</strong> {{ session.get('reminder') }}</p>
+                    <form method="POST" action="/clear_reminder">
+                        <button type="submit" class="btn btn-outline-light btn-sm mt-2">Clear Reminder</button>
+                    </form>
+                {% else %}
+                    <form method="POST" action="/reminder">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" name="reminder" placeholder="Enter your reminder for today..." required>
+                        </div>
+                        <button type="submit" class="btn btn-outline-light">Save Reminder</button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>        
+        
+    </body>
+    
+</body>
+</html>

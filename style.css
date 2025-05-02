@@ -1,0 +1,25 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fdfcf9;
+    color: #2e2e2e;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+
+
+h1, h2, h3 {
+    font-weight: 600;
+    color: #3e2723;
+}
+
+.card {
+    background-color: #fefae0;
+    border: none;
+    border-radius: 12px;
+}
+
+.card-title {
+    color: #5d4037;
+}

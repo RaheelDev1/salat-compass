@@ -1,0 +1,3 @@
+OPENWEATHER_API_KEY = "8a0c2294cb63a64e39d6dc9f7d78b960"
+CITY = "Dublin"
+COUNTRY = "Ireland"
